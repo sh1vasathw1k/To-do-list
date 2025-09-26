@@ -27,12 +27,18 @@ function renderTasks() {
     taskLeft.appendChild(checkbox);
     taskLeft.appendChild(taskText);
 
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.className = "edit-btn";
+    editBtn.onclick = () => editTask(index);
+
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.className = "delete-btn";
     deleteBtn.onclick = () => deleteTask(index);
 
     li.appendChild(taskLeft);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
   });
@@ -59,6 +65,15 @@ function toggleComplete(index) {
   tasks[index].completed = !tasks[index].completed;
   saveTasks();
   renderTasks();
+}
+
+function editTask(index) {
+  const newText = prompt("Edit your task:", tasks[index].text);
+  if (newText !== null && newText.trim() !== "") {
+    tasks[index].text = newText.trim();
+    saveTasks();
+    renderTasks();
+  }
 }
 
 // Initial render

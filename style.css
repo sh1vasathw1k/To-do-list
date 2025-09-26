@@ -114,6 +114,21 @@ li.completed .task-text {
   background: #1d2326;
 }
 
+.edit-btn {
+  background: #CBB89D; /* same as container background */
+  color: #283034;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: #b5a487; /* slightly darker shade */
+}
+
 input[type="checkbox"] {
   transform: scale(1.2);
   cursor: pointer;
