@@ -1,14 +1,17 @@
-// Load tasks + history
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let history = JSON.parse(localStorage.getItem("history")) || [];
 
-// Save everything
+document.getElementById("taskInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+
 function saveData() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("history", JSON.stringify(history));
 }
 
-// Render tasks on screen
 function renderTasks() {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
@@ -49,18 +52,10 @@ function renderTasks() {
   });
 }
 
-// Add a task
 function addTask() {
   const input = document.getElementById("taskInput");
   const text = input.value.trim();
   if (text === "") return;
-
-  document.getElementById("taskInput").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    addTask();
-  }
-});
-
 
   tasks.push({ text, completed: false });
   input.value = "";
@@ -68,34 +63,28 @@ function addTask() {
   renderTasks();
 }
 
-// DELETE moves task → history
 function deleteTask(index) {
   const now = new Date();
   const dateStr = now.toLocaleString();
 
-  // Push deleted task info into history
   history.push({
     text: tasks[index].text,
     deletedOn: dateStr
   });
 
-  // Remove the task from the list
   tasks.splice(index, 1);
   saveData();
   renderTasks();
 }
 
-// CHECKMARK just toggles completion (does NOT remove, does NOT save to history)
 function toggleComplete(index) {
   const task = tasks[index];
   task.completed = !task.completed;
 
-  // No history, no deletion — just toggle
   saveData();
   renderTasks();
 }
 
-// Edit task
 function editTask(index) {
   const newText = prompt("Edit your task:", tasks[index].text);
   if (newText !== null && newText.trim() !== "") {
@@ -105,7 +94,6 @@ function editTask(index) {
   }
 }
 
-// Clear history
 function clearHistory() {
   if (confirm("Are you sure you want to clear all deleted tasks?")) {
     history = [];
@@ -113,6 +101,4 @@ function clearHistory() {
   }
 }
 
-// Initial render
 renderTasks();
-
