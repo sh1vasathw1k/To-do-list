@@ -55,6 +55,13 @@ function addTask() {
   const text = input.value.trim();
   if (text === "") return;
 
+  document.getElementById("taskInput").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+
+
   tasks.push({ text, completed: false });
   input.value = "";
   saveData();
@@ -108,3 +115,4 @@ function clearHistory() {
 
 // Initial render
 renderTasks();
+
