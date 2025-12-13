@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deleted Tasks History</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="container">
-    <h1>Deleted Tasks (History)</h1>
 
-    <ul id="historyList"></ul>
+<body class="bg-gray-100">
 
-    <div class="bottom-buttons">
-      <button onclick="clearHistory()">Clear History</button>
-      <button onclick="location.href='index.html'">Back to To-Do List</button>
+  <div class="tasks-container">
+    <div class="tasks-card history-card">
+
+      <h2>Deleted Tasks</h2>
+
+      <div id="historyList" class="history-list"></div>
+
+      <div class="history-actions">
+        <button id="clearHistoryBtn" class="history-btn danger">
+          Clear History
+        </button>
+
+        <button id="backBtn" class="history-btn secondary">
+          Back
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    let history = JSON.parse(localStorage.getItem("history")) || [];
-
-    function renderHistory() {
-      const historyList = document.getElementById("historyList");
-      historyList.innerHTML = "";
-
-      if (history.length === 0) {
-        historyList.innerHTML = "<p style='text-align:center;color:#5a3610;'>No deleted tasks yet.</p>";
-        return;
-      }
-
-      history.forEach(item => {
-        const li = document.createElement("li");
-        li.classList.add("completed");
-
-        const text = document.createElement("span");
-        text.className = "task-text";
-
-        // ⬅️ FIXED: now using deletedOn instead of completedOn
-        text.textContent = `${item.text} (Deleted on ${item.deletedOn})`;
-
-        li.appendChild(text);
-        historyList.appendChild(li);
-      });
-    }
-
-    function clearHistory() {
-      if (confirm("Are you sure you want to clear all history?")) {
-        history = [];
-        localStorage.setItem("history", JSON.stringify(history));
-        renderHistory();
-      }
-    }
-
-    renderHistory();
-  </script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
