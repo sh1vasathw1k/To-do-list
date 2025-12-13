@@ -2,28 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My To-Do List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Tasks</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="container">
-    <h1>My To-Do List</h1>
+  <div class="tasks-container">
+    <div class="tasks-card">
 
-    <div class="input-section">
-      <input type="text" id="taskInput" placeholder="Enter a new task" />
-      <button onclick="addTask()">Add</button>
-    </div>
+      <h2>My To-Do List</h2>
+      <p id="userDisplay" class="logged-in-email"></p>
 
-    <ul id="taskList"></ul>
+      <div class="task-input-row">
+        <input
+          id="taskInput"
+          type="text"
+          placeholder="Enter a new task"
+        />
+        <button id="addBtn" class="add-btn">Add</button>
+      </div>
 
-    <div class="bottom-buttons">
-      <button onclick="location.href='history.html'">View history</button>
-      <button id="clearHistoryBtn" onclick="clearHistory()">Clear history</button>
+      <div id="taskList" class="task-list"></div>
+
+      <div class="bottom-actions">
+        <button id="historyBtn" class="secondary-btn">
+          View History
+        </button>
+        <button id="logoutBtn" class="logout-btn">
+          Logout
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
-
